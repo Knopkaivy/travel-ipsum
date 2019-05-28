@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import '../styles/global.css';
 
 import NavItem from './Nav/NavItem';
 import Ipsum from './Ipsum';
 import List from './List';
+import Button from './Button';
 
 class App extends Component {
 	constructor(props) {
@@ -86,6 +88,7 @@ class App extends Component {
 		};
 		this.fetchIpsum = this.fetchIpsum.bind(this);
 		this.clickHandler = this.clickHandler.bind(this);
+		this.refreshHandler = this.refreshHandler.bind(this);
 	}
 
 	fetchIpsum(val) {
@@ -120,6 +123,16 @@ class App extends Component {
 			activeImg: img
 		}));
 	}
+
+	refreshHandler() {
+		// let val = this.state.active;
+		let newIpsum = this.fetchIpsum(this.state.active);
+		this.setState((state) => ({
+			...state,
+			ipsum: newIpsum
+		}));
+	}
+
 	render() {
 		const items = this.state.items.map((el) => {
 			return (
@@ -143,8 +156,10 @@ class App extends Component {
 						</header>
 						<main>
 							<div className='Controls'>
-								<button className='Control-btn'>Refresh</button>
-								<button className='Control-btn'>Copy</button>
+								<Button name='Refresh' click={this.refreshHandler} />
+								<CopyToClipboard text={this.state.ipsum}>
+									<button className='Control-btn'>Copy</button>
+								</CopyToClipboard>
 							</div>
 							<div className='Ipsum-container'>
 								<Ipsum ipsum={this.state.ipsum} />
