@@ -7,6 +7,7 @@ import NavItem from './Nav/NavItem';
 import Ipsum from './Ipsum';
 import List from './List';
 import Button from './Button';
+import Image from './Image';
 
 class App extends Component {
 	constructor(props) {
@@ -42,52 +43,13 @@ class App extends Component {
 			active: 'Paris',
 			activeImg:
 				'https://images.unsplash.com/photo-1471623320832-752e8bbf8413?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1549&q=80',
-			ipsum: `Paris' monument-lined boulevards, museums, classical bistros and boutiques are
-            enhanced by a new wave of multimedia galleries, creative wine bars, design shops and
-            tech start-ups. Wine-producing grapevines flourish in parks such as the Parc de
-            Belleville, with elevated city views, and the Parc de Bercy, adjacent to the former
-            wine warehouses on Cour St-Émilion that now house shops and restaurants making up
-            Bercy Village. Paris' monument-lined boulevards, museums, classical bistros and
-            boutiques are enhanced by a new wave of multimedia galleries, creative wine bars,
-            design shops and tech start-ups. Paris' monument-lined boulevards, museums,
-            classical bistros and boutiques are enhanced by a new wave of multimedia galleries,
-            creative wine bars, design shops and tech start-ups. Adjacent to the Louvre, the
-            elegant Jardin des Tuileries sees plenty of visitors. I love that this bistro in the
-            Saint Germain neighborhood, in the 6th arrondissement, has been here forever.
-            Cézanne drank here. So did Picasso. And Jim Morrison. The works of French Romantic
-            artist Eugène Delacroix can be found in the Louvre, for instance, but also at the
-            delightful Musée National Eugène Delacroix. The works of French Romantic artist
-            Eugène Delacroix can be found in the Louvre, for instance, but also at the
-            delightful Musée National Eugène Delacroix. Wine-producing grapevines flourish in
-            parks such as the Parc de Belleville, with elevated city views, and the Parc de
-            Bercy, adjacent to the former wine warehouses on Cour St-Émilion that now house
-            shops and restaurants making up Bercy Village. Adjacent to the Louvre, the elegant
-            Jardin des Tuileries sees plenty of visitors. Wine-producing grapevines flourish in
-            parks such as the Parc de Belleville, with elevated city views, and the Parc de
-            Bercy, adjacent to the former wine warehouses on Cour St-Émilion that now house
-            shops and restaurants making up Bercy Village. Paris' monument-lined boulevards,
-            museums, classical bistros and boutiques are enhanced by a new wave of multimedia
-            galleries, creative wine bars, design shops and tech start-ups. I love that this
-            bistro in the Saint Germain neighborhood, in the 6th arrondissement, has been here
-            forever. Cézanne drank here. So did Picasso. And Jim Morrison. I love that this
-            bistro in the Saint Germain neighborhood, in the 6th arrondissement, has been here
-            forever. Cézanne drank here. So did Picasso. And Jim Morrison. A 40-minute train
-            journey southwest of the city, the opulent Château de Versailles is a hugely popular
-            day trip. Wine-producing grapevines flourish in parks such as the Parc de
-            Belleville, with elevated city views, and the Parc de Bercy, adjacent to the former
-            wine warehouses on Cour St-Émilion that now house shops and restaurants making up
-            Bercy Village. I love that this bistro in the Saint Germain neighborhood, in the 6th
-            arrondissement, has been here forever. Cézanne drank here. So did Picasso. And Jim
-            Morrison. Wine-producing grapevines flourish in parks such as the Parc de
-            Belleville, with elevated city views, and the Parc de Bercy, adjacent to the former
-            wine warehouses on Cour St-Émilion that now house shops and restaurants making up
-            Bercy Village. Modern and contemporary art is showcased at the comprehensive Centre
-            Pompidou's Musée National d'Art Moderne but also at smaller venues like the city-run
-            Musée d’Art Moderne de la Ville de Paris. A 40-minute train journey southwest of the
-            city, the opulent Château de Versailles is a hugely popular day trip.`
+			loadingImg: false,
+			ipsum: ``,
+			copied: false
 		};
 		this.fetchIpsum = this.fetchIpsum.bind(this);
 		this.clickHandler = this.clickHandler.bind(this);
+		this.copyHandler = this.copyHandler.bind(this);
 		this.refreshHandler = this.refreshHandler.bind(this);
 	}
 
@@ -109,6 +71,7 @@ class App extends Component {
 	}
 
 	clickHandler(e) {
+		this.setState({ loadingImg: true });
 		let val = e.target.textContent;
 		let img = '';
 		this.state.items.map((el) => {
@@ -120,17 +83,28 @@ class App extends Component {
 			...state,
 			active: val,
 			ipsum: newIpsum,
-			activeImg: img
+			activeImg: img,
+			loadingImg: false,
+			copied: false
 		}));
 	}
 
+	copyHandler() {
+		console.log('from copy handler');
+		this.setState({ copied: true });
+	}
+
 	refreshHandler() {
-		// let val = this.state.active;
 		let newIpsum = this.fetchIpsum(this.state.active);
 		this.setState((state) => ({
 			...state,
-			ipsum: newIpsum
+			ipsum: newIpsum,
+			copied: false
 		}));
+	}
+
+	componentDidMount() {
+		this.refreshHandler();
 	}
 
 	render() {
@@ -148,32 +122,32 @@ class App extends Component {
 
 		return (
 			<div className='App-container'>
+				{this.state.loadingImg ? (
+					<div className='App-image-container' />
+				) : (
+					<Image imageURL={this.state.activeImg} active={this.state.active} />
+				)}
+				{/* <Image imageURL={this.state.activeImg} /> */}
 				<section className='App-content'>
-					<div className='Content-main'>
-						<header>
-							<h1>Travel Ipsum</h1>
-							<p className='description'>Placeholder text for those who love travel</p>
-						</header>
-						<main>
-							<div className='Controls'>
-								<Button name='Refresh' click={this.refreshHandler} />
-								<CopyToClipboard text={this.state.ipsum}>
-									<button className='Control-btn'>Copy</button>
-								</CopyToClipboard>
-							</div>
-							<div className='Ipsum-container'>
-								<Ipsum ipsum={this.state.ipsum} />
-							</div>
-						</main>
-					</div>
 					<div className='Content-menu'>
 						<div className='Nav'>{items}</div>
 					</div>
+					<header>
+						<h1>Travel Ipsum</h1>
+						<p className='description'>Placeholder text for those who love travel</p>
+					</header>
+					<main>
+						<div className='Controls'>
+							<CopyToClipboard text={this.state.ipsum} onCopy={this.copyHandler}>
+								<button className='Copy-btn'>{this.state.copied ? 'Copied' : 'Copy All'}</button>
+							</CopyToClipboard>
+							<Button name='Refresh' className='Refresh-btn' click={this.refreshHandler} />
+						</div>
+						<div className='Ipsum-container'>
+							<Ipsum ipsum={this.state.ipsum} />
+						</div>
+					</main>
 				</section>
-				<div
-					className='App-image-container'
-					style={{ background: `url(${this.state.activeImg}) bottom center / cover no-repeat` }}
-				/>
 			</div>
 		);
 	}
