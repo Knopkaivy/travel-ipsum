@@ -43,7 +43,7 @@ class App extends Component {
 			active: 'Paris',
 			activeImg:
 				'https://images.unsplash.com/photo-1471623320832-752e8bbf8413?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1549&q=80',
-			loadingImg: false,
+			// loadingImg: false,
 			ipsum: ``,
 			copied: false
 		};
@@ -71,7 +71,7 @@ class App extends Component {
 	}
 
 	clickHandler(e) {
-		this.setState({ loadingImg: true });
+		// this.setState({ loadingImg: true });
 		let val = e.target.textContent;
 		let img = '';
 		this.state.items.map((el) => {
@@ -120,14 +120,15 @@ class App extends Component {
 			);
 		});
 
+		let currentImage = this.state.items.map((el, i) => {
+			if (this.state.items[i].img === this.state.activeImg) {
+				return <Image imageURL={this.state.activeImg} active={this.state.active} />;
+			}
+		});
+
 		return (
 			<div className='App-container'>
-				{this.state.loadingImg ? (
-					<div className='App-image-container' />
-				) : (
-					<Image imageURL={this.state.activeImg} active={this.state.active} />
-				)}
-				{/* <Image imageURL={this.state.activeImg} /> */}
+				{currentImage}
 				<section className='App-content'>
 					<div className='Content-menu'>
 						<div className='Nav'>{items}</div>

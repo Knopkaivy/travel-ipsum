@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Transition } from 'react-transition-group';
 
 class Image extends Component {
 	constructor(props) {
@@ -6,11 +7,11 @@ class Image extends Component {
 	}
 
 	componentDidMount() {
-		console.log('image component did mount');
+		// console.log('image component did mount');
 	}
 
 	componentWillUnmount() {
-		console.log('image component will unmount');
+		// console.log('image component will unmount');
 	}
 
 	render() {
