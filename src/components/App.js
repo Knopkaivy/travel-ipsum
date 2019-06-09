@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Helmet } from 'react-helmet';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
@@ -133,6 +134,14 @@ class App extends Component {
 
 		return (
 			<div className='App-container'>
+				<Helmet>
+					<meta charSet='utf-8' />
+					<title>Travel Ipsum</title>
+					<meta
+						name='description'
+						content='GatsbyJS one page interactive demo application. Lorem Ipsum travel themed random text generator. There are 5 cities to choose from, each makes text look specific to language and local landmark names'
+					/>
+				</Helmet>
 				<TransitionGroup>{currentImage}</TransitionGroup>
 				<section className='App-content'>
 					<div className='Content-menu'>
