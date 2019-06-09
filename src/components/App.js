@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import '../styles/global.css';
+import '../styles/animations.css';
 
 import NavItem from './Nav/NavItem';
 import Ipsum from './Ipsum';
@@ -119,16 +121,19 @@ class App extends Component {
 				/>
 			);
 		});
-
 		let currentImage = this.state.items.map((el, i) => {
 			if (this.state.items[i].img === this.state.activeImg) {
-				return <Image imageURL={this.state.activeImg} active={this.state.active} />;
+				return (
+					<CSSTransition key={i} timeout={1000} classNames='move'>
+						<Image key={i} imageURL={this.state.activeImg} active={this.state.active} />
+					</CSSTransition>
+				);
 			}
 		});
 
 		return (
 			<div className='App-container'>
-				{currentImage}
+				<TransitionGroup>{currentImage}</TransitionGroup>
 				<section className='App-content'>
 					<div className='Content-menu'>
 						<div className='Nav'>{items}</div>

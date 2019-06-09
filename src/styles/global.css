@@ -40,7 +40,7 @@ body {
 	padding: 0;
 	overflow: hidden;
 	opacity: 90%;
-	/* background-color: var(--orange); */
+	background-color: var(--orange);
 	transition: all 0s linear 0.1s;
 }
 
