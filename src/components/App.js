@@ -136,6 +136,7 @@ class App extends Component {
 			<div className='App-container'>
 				<Helmet>
 					<meta charSet='utf-8' />
+					<html lang='en' amp />
 					<title>Travel Ipsum</title>
 					<meta
 						name='description'
