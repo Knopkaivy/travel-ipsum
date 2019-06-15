@@ -83,10 +83,11 @@ body {
 
 .NavItem:active {
 	color: var(--orange);
+	transform: scale(0.98);
 }
 
 h1 {
-	font-size: 4.5rem;
+	font-size: 4rem;
 	font-style: normal;
 	font-weight: 400;
 	color: var(--orange);
@@ -118,7 +119,10 @@ h1 {
 }
 
 .Copy-btn {
-	color: var(--orange);
+	color: var(--tan);
+	background-color: var(--orange);
+	padding: 3px 8px;
+	width: 90px;
 }
 
 .Copy-btn:hover,
@@ -132,7 +136,11 @@ h1 {
 
 .Copy-btn:hover {
 	outline: none;
-	color: var(--grey);
+	background-color: var(--grey);
+}
+.Copy-btn:active,
+.Refresh-btn:active {
+	transform: scale(0.98);
 }
 
 .Refresh-btn:hover {
@@ -152,10 +160,11 @@ h1 {
 
 .Ipsum {
 	min-width: 300px;
-	max-width: 500px;
+	max-width: 550px;
 	line-height: 2rem;
-	height: 55vh;
+	height: 60vh;
 	margin: 0;
+	text-align: justify;
 }
 
 @media (max-width: 949px) {

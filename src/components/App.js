@@ -155,7 +155,7 @@ class App extends Component {
 					<main>
 						<div className='Controls'>
 							<CopyToClipboard text={this.state.ipsum} onCopy={this.copyHandler}>
-								<button className='Copy-btn'>{this.state.copied ? 'Copied' : 'Copy All'}</button>
+								<button className='Copy-btn'>{this.state.copied ? 'Copied!' : 'Copy All'}</button>
 							</CopyToClipboard>
 							<Button name='Refresh' className='Refresh-btn' click={this.refreshHandler} />
 						</div>
