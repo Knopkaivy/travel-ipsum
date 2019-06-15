@@ -46,7 +46,6 @@ class App extends Component {
 			active: 'Paris',
 			activeImg:
 				'https://images.unsplash.com/photo-1471623320832-752e8bbf8413?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1549&q=80',
-			// loadingImg: false,
 			ipsum: ``,
 			copied: false
 		};
@@ -77,7 +76,6 @@ class App extends Component {
 	}
 
 	clickHandler(e) {
-		// this.setState({ loadingImg: true });
 		let val = e.target.textContent;
 		let img = '';
 		this.state.items.map((el) => {
@@ -96,7 +94,6 @@ class App extends Component {
 	}
 
 	copyHandler() {
-		console.log('from copy handler');
 		this.setState({ copied: true });
 	}
 
