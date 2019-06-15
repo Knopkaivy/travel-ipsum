@@ -46,7 +46,7 @@ class App extends Component {
 			active: 'Paris',
 			activeImg:
 				'https://images.unsplash.com/photo-1471623320832-752e8bbf8413?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1549&q=80',
-			ipsum: ``,
+			ipsum: [],
 			copied: false
 		};
 		this.fetchIpsum = this.fetchIpsum.bind(this);
