@@ -59,16 +59,19 @@ class App extends Component {
 	fetchIpsum(val) {
 		const pars = 5;
 		const sents = 5;
-		let newIpsum = '';
+		let newIpsum = [];
 		let listName = Array.from(val)
 			.filter((el) => {
 				return el !== ' ';
 			})
 			.join('');
 		for (let i = 0; i < pars; i++) {
+			let newPar = '';
 			for (let j = 0; j < sents; j++) {
-				newIpsum += List[listName][Math.floor(Math.random() * List[listName].length)];
+				newPar += List[listName][Math.floor(Math.random() * List[listName].length)];
 			}
+			newIpsum.push(newPar);
+			newPar = '';
 		}
 		return newIpsum;
 	}

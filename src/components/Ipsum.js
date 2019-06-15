@@ -1,7 +1,8 @@
 import React from 'react';
 
 const Ipsum = (props) => {
-	return <p className='Ipsum'>{props.ipsum}</p>;
+	const { ipsum } = props;
+	return <div className='Ipsum'>{ipsum.map((par) => <p>{par}</p>)}</div>;
 };
 
 export default Ipsum;
