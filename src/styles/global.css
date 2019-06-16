@@ -79,6 +79,7 @@ body {
 
 .NavItem:hover {
 	color: var(--orange);
+	cursor: pointer;
 }
 
 .NavItem:active {
@@ -125,6 +126,10 @@ h1 {
 	width: 90px;
 }
 
+.Refresh-btn {
+	color: var(--grey);
+}
+
 .Copy-btn:hover,
 .Copy-btn:focus,
 .Copy-btn:active,
@@ -135,22 +140,20 @@ h1 {
 }
 
 .Copy-btn:hover {
-	outline: none;
 	background-color: var(--grey);
+	cursor: pointer;
 }
+
+.Refresh-btn:hover {
+	color: var(--orange);
+	cursor: pointer;
+}
+
 .Copy-btn:active,
 .Refresh-btn:active {
 	transform: scale(0.98);
 }
 
-.Refresh-btn:hover {
-	outline: none;
-	color: var(--orange);
-}
-
-.Refresh-btn {
-	color: var(--grey);
-}
 .Ipsum-container {
 	overflow-y: scroll;
 }
