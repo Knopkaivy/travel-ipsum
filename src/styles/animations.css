@@ -1,17 +1,11 @@
 .move-enter {
-	opacity: 0.1;
+	opacity: 0;
 }
 
 .move-enter-active {
-	opacity: 0.9;
-	transition: all 1s ease-in;
-}
-
-.move-exit {
-	opacity: 0.9;
+	opacity: 1;
 }
 
 .move-exit-active {
 	opacity: 0;
-	transition: all 1s linear;
 }
